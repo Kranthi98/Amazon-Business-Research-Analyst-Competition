@@ -1,0 +1,20 @@
+set.seed(2021)
+n <- nrow(iris)
+i <- sample(n, 0.7*n)
+train_dataset <- iris[i, -5]
+test_dataset <- iris[-i, -5]
+labels_train <- iris[i, 5]
+labels_test <- iris[-i, 5]
+
+library(class)
+library(tidyverse)
+
+knn_list <- lapply(1:30, function(l){
+  knn(train_dataset, test_dataset, cl = labels_train, k = l)
+})
+
+ok <- sapply(knn_list, '==', labels_test)
+acc <- colMeans(ok)
+
+which(acc == max(acc))
+plot(acc, type = "b")
