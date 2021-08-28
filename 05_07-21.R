@@ -35,6 +35,8 @@ test = read.csv("Test.csv")
 head(train)
 
 
+
+
 ##feature engineering
 train = train[c(-1,-2,-6)]
 train$CTCratio = round(train$ExpectedCTC/train$CurrentCTC,2)
